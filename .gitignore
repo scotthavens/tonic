@@ -55,3 +55,6 @@ Thumbs.db
 *.sublime-*
 
 tonic.egg-info
+
+.pydevproject
+.project

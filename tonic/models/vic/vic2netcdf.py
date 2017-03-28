@@ -456,10 +456,13 @@ End Date: {5}
     def nc_add_data_standard(self, points):
         ys = points.get_ys()
         xs = points.get_xs()
+        
+        for name in self.three_dim_vars:
+            data = points.get_data(name, self.slice)
+            for i in range(len(ys)):
+                self.f.variables[name][:, ys[i], xs[i]] = data[i,:]
+        
         for p in points:
-            for name in self.three_dim_vars:
-                data = points.get_data(name, self.slice)
-                self.f.variables[name][:, ys, xs] = data
             for name in self.four_dim_vars:
                 varshape = self.f.variables[name].shape[1]
                 for i in pyrange(varshape):
